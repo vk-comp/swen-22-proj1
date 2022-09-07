@@ -10,19 +10,10 @@ public class TetrisBlockGenerator {
 
     }
 
-    public static TetrisBlock generateTetrisBlock(Tetris tetris,String difficulty){
-
-        int rnd;
+    public static TetrisBlock generateBlock(Tetris tetris, int blockID){
         Location[][] r = null;
-        Random random = new Random(0);
-        int blockID = 0;
         String blockName = null;
-        if(difficulty == "medium" || difficulty == "madness"){
-            rnd = random.nextInt(10);
-        } else{ rnd = random.nextInt(7);}
-
-        // Input switch statements
-        switch (rnd) {
+        switch (blockID) {
             case 0:
                 blockID = 0;
                 blockName = "I";
@@ -206,5 +197,14 @@ public class TetrisBlockGenerator {
                 break;
         }
         return new TetrisBlock(tetris, r, blockID, blockName);
+    }
+    public static TetrisBlock generateTetrisBlock(Tetris tetris,String difficulty){
+        int rnd;
+        Random random = new Random(0);
+        if(difficulty == "medium" || difficulty == "madness"){
+            rnd = random.nextInt(10);
+        } else{ rnd = random.nextInt(7);}
+
+        return generateBlock(tetris, rnd);
     }
 }

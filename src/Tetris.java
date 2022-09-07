@@ -79,11 +79,14 @@ public class Tetris extends JFrame implements GGActListener {
         if (isAuto) {
             ((TetrisBlock) t).setAutoBlockMove(currentBlockMove);
         }
+        TetrisBlock preview = generator.generateBlock(this, ((TetrisBlock) t).getBlockId());
+        preview.display(gameGrid2, new Location(2 ,1));
+        blockPreview = preview;
        // TetrisBlock preview = ((TetrisBlock) t).display(gameGrid2, new Location(2, 1));
         //blockPreview = preview;
 
         /*int rnd = random.nextInt(7);
-        // t = new TetrisBlockGenerator(this);
+
         switch (rnd) {
             case 0:
                 t = new I(this);
@@ -164,6 +167,8 @@ public class Tetris extends JFrame implements GGActListener {
     // Handle user input to move block. Arrow left to move left, Arrow right to move right, Arrow up to rotate and
     // Arrow down for going down
     private void moveBlock(int keyEvent) {
+
+
         if (currentBlock instanceof I) {
             switch (keyEvent) {
                 case KeyEvent.VK_UP:

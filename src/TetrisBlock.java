@@ -22,7 +22,9 @@ class TetrisBlock extends Actor
         for (int i = 0; i < r.length; i++)
             blocks.add(new TetroBlock(blockId, r[i]));
     }
-
+    public int getBlockId() {
+        return blockId;
+    }
     public String toString() {
         return "For testing, do not change: Block: " + blockName + ". Location: " + blocks + ". Rotation: " + rotId;
     }
