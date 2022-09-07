@@ -168,8 +168,22 @@ public class Tetris extends JFrame implements GGActListener {
     // Handle user input to move block. Arrow left to move left, Arrow right to move right, Arrow up to rotate and
     // Arrow down for going down
     private void moveBlock(int keyEvent) {
-
-
+        switch (keyEvent) {
+            case KeyEvent.VK_UP:
+                ((TetrisBlock) currentBlock).rotate();
+                break;
+            case KeyEvent.VK_LEFT:
+                ((TetrisBlock) currentBlock).left();
+                break;
+            case KeyEvent.VK_RIGHT:
+                ((TetrisBlock) currentBlock).right();
+                break;
+            case KeyEvent.VK_DOWN:
+                ((TetrisBlock) currentBlock).drop();
+                break;
+            default:
+                return;
+        }
         if (currentBlock instanceof I) {
             switch (keyEvent) {
                 case KeyEvent.VK_UP:
