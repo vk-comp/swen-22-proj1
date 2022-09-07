@@ -6,6 +6,10 @@ import java.util.*;
 
 public class TetrisBlockGenerator {
 
+    private Location[][] r = new Location[4][4];
+    static Random random = new Random(0);
+
+
     public TetrisBlockGenerator() {
 
     }
@@ -200,10 +204,12 @@ public class TetrisBlockGenerator {
     }
     public static TetrisBlock generateTetrisBlock(Tetris tetris,String difficulty){
         int rnd;
-        Random random = new Random(0);
+
         if(difficulty == "medium" || difficulty == "madness"){
             rnd = random.nextInt(10);
-        } else{ rnd = random.nextInt(7);}
+        } else{ rnd = random.nextInt(7);
+            System.out.println("rnd: " + rnd);
+        }
 
         return generateBlock(tetris, rnd);
     }

@@ -76,6 +76,7 @@ public class Tetris extends JFrame implements GGActListener {
         Actor t;
         TetrisBlockGenerator generator = new TetrisBlockGenerator();
         t = generator.generateTetrisBlock(this, "easy");
+        System.out.println(((TetrisBlock) t).getBlockId());
         if (isAuto) {
             ((TetrisBlock) t).setAutoBlockMove(currentBlockMove);
         }
