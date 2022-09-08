@@ -16,7 +16,7 @@ public class Tetris extends JFrame implements GGActListener {
     private int score = 0;
 
     private String difficulty = null;
-    private int slowDown = 5;
+    private int slowDown;
     private Random random = new Random(0);
 
     private TetrisGameCallback gameCallback;
@@ -34,11 +34,33 @@ public class Tetris extends JFrame implements GGActListener {
         this.seed = Integer.parseInt(properties.getProperty("seed", "30006"));
         this.difficulty = properties.getProperty("difficulty");
         System.out.println(difficulty);
+        setDifficultySpeed(difficulty);
         random = new Random(seed);
         isAuto = Boolean.parseBoolean(properties.getProperty("isAuto"));
         String blockActionProperty = properties.getProperty("autoBlockActions", "");
         blockActions = blockActionProperty.split(",");
     }
+
+    // set speed depending on difficulty
+    private void setDifficultySpeed(String difficulty) {
+        if (difficulty.equals("medium")  || difficulty.equals("madness")) {
+            this.slowDown = 4;
+        } else {
+            this.slowDown = 5;
+        }
+        if (score > 10)
+            this.slowDown--;
+        if (score > 20)
+            this.slowDown = this.slowDown - 2;
+        if (score > 30)
+            this.slowDown = this.slowDown - 3;
+        if (score > 40)
+            this.slowDown = this.slowDown - 4;
+        if (score > 50)
+            slowDown = 0;
+
+    }
+
 
     public Tetris(TetrisGameCallback gameCallback, Properties properties) {
         // Initialise value
@@ -221,16 +243,7 @@ public class Tetris extends JFrame implements GGActListener {
                 gameCallback.changeOfScore(score);
                 showScore(score);
                 // Set speed of tetrisBlocks
-                if (score > 10)
-                    slowDown = 4;
-                if (score > 20)
-                    slowDown = 3;
-                if (score > 30)
-                    slowDown = 2;
-                if (score > 40)
-                    slowDown = 1;
-                if (score > 50)
-                    slowDown = 0;
+                setDifficultySpeed(difficulty);
             }
         }
     }
