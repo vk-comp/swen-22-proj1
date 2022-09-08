@@ -8,19 +8,22 @@ import java.util.Arrays;
 class TetrisBlock extends Actor
 {
     private final int blockId;
+    private final int blockType;
     private final String blockName;
     private Location[][] r;
 
-    TetrisBlock(Tetris tetris, Location[][] r, int blockId, String blockName)
+    TetrisBlock(Tetris tetris, Location[][] r, int blockId, String blockName, int blockType)
     {
         super();
 
         this.tetris = tetris;
         this.blockId = blockId;
+        this.blockType = blockType;
         this.blockName = blockName;
 
+
         for (int i = 0; i < r.length; i++)
-            blocks.add(new TetroBlock(blockId, r[i]));
+            blocks.add(new TetroBlock(blockType, r[i]));
     }
     public int getBlockId() {
         return blockId;

@@ -17,9 +17,11 @@ public class TetrisBlockGenerator {
     public static TetrisBlock generateBlock(Tetris tetris, int blockID){
         Location[][] r = null;
         String blockName = null;
+        int blockType = 0;
         switch (blockID) {
             case 0:
                 blockID = 0;
+                blockType = 0;
                 blockName = "I";
 
                 // rotId 0
@@ -47,6 +49,7 @@ public class TetrisBlockGenerator {
             case 1:
                 //J
                 blockID = 1;
+                blockType = 1;
                 blockName = "J";
                 r = new Location[4][4];
                 r[0][0] = new Location(new Location(-1, 0));
@@ -72,6 +75,7 @@ public class TetrisBlockGenerator {
             case 2:
                 //L
                 blockID = 2;
+                blockType = 2;
                 blockName = "L";
                 r = new Location[4][4];
                 // rotId 0
@@ -98,6 +102,7 @@ public class TetrisBlockGenerator {
             case 3:
                 //O
                 blockID = 3;
+                blockType = 3;
                 blockName = "O";
                 r = new Location[4][4];
                 // rotId 0
@@ -124,6 +129,7 @@ public class TetrisBlockGenerator {
             case 4:
                 //S
                 blockID = 4;
+                blockType = 4;
                 blockName = "S";
                 r = new Location[4][4];
                 // rotId 0
@@ -150,6 +156,7 @@ public class TetrisBlockGenerator {
             case 5:
                 //T
                 blockID = 5;
+                blockType = 5;
                 blockName = "T";
                 r = new Location[4][4];
                 // rotId 0
@@ -176,6 +183,7 @@ public class TetrisBlockGenerator {
             case 6:
                 //Z
                 blockID = 6;
+                blockType = 6;
                 blockName = "Z";
                 r = new Location[4][4];
                 // rotId 0
@@ -200,35 +208,41 @@ public class TetrisBlockGenerator {
                 r[3][3] = new Location(new Location(1, -1));
                 break;
             case 7:
-                blockID = 6;
-                blockName = "Z";
-                r = new Location[4][4];
+                blockID = 7;
+                blockType = 1;
+                blockName = "+";
+                r = new Location[5][4];
                 // rotId 0
                 r[0][0] = new Location(new Location(-1, 0));
                 r[1][0] = new Location(new Location(0, 0));
-                r[2][0] = new Location(new Location(0, 1));
-                r[3][0] = new Location(new Location(1, 1));
+                r[2][0] = new Location(new Location(1, 0));
+                r[3][0] = new Location(new Location(0, 1));
+                r[4][0] = new Location(new Location(0, -1));
                 // rotId 1
                 r[0][1] = new Location(new Location(0, -1));
                 r[1][1] = new Location(new Location(0, 0));
-                r[2][1] = new Location(new Location(-1, 0));
-                r[3][1] = new Location(new Location(-1, 1));
+                r[2][1] = new Location(new Location(0, 1));
+                r[3][1] = new Location(new Location(-1, 0));
+                r[4][1] = new Location(new Location(1, 0));
                 // rotId 2
                 r[0][2] = new Location(new Location(1, 0));
                 r[1][2] = new Location(new Location(0, 0));
-                r[2][2] = new Location(new Location(0, -1));
-                r[3][2] = new Location(new Location(-1, -1));
+                r[2][2] = new Location(new Location(-1, 0));
+                r[3][2] = new Location(new Location(0, -1));
+                r[4][2] = new Location(new Location(0, 1));
                 // rotId 3
                 r[0][3] = new Location(new Location(0, 1));
                 r[1][3] = new Location(new Location(0, 0));
-                r[2][3] = new Location(new Location(1, 0));
-                r[3][3] = new Location(new Location(1, -1));
+                r[2][3] = new Location(new Location(0, -1));
+                r[3][3] = new Location(new Location(1, 0));
+                r[4][3] = new Location(new Location(-1, 0));
                 break;
 
             case 8:
-                blockID = 6;
-                blockName = "Z";
-                r = new Location[4][4];
+                blockID = 8;
+                blockType = 2;
+                blockName = "P";
+                r = new Location[5][4];
                 // rotId 0
                 r[0][0] = new Location(new Location(-1, 0));
                 r[1][0] = new Location(new Location(0, 0));
@@ -251,9 +265,10 @@ public class TetrisBlockGenerator {
                 r[3][3] = new Location(new Location(1, -1));
                 break;
             case 9:
-                blockID = 6;
-                blockName = "Z";
-                r = new Location[4][4];
+                blockID = 9;
+                blockType = 3;
+                blockName = "Q";
+                r = new Location[5][4];
                 // rotId 0
                 r[0][0] = new Location(new Location(-1, 0));
                 r[1][0] = new Location(new Location(0, 0));
@@ -276,7 +291,7 @@ public class TetrisBlockGenerator {
                 r[3][3] = new Location(new Location(1, -1));
                 break;
         }
-        return new TetrisBlock(tetris, r, blockID, blockName);
+        return new TetrisBlock(tetris, r, blockID, blockName, blockType);
     }
     public static TetrisBlock generateTetrisBlock(Tetris tetris,String difficulty){
         int rnd;
