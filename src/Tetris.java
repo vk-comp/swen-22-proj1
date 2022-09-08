@@ -46,7 +46,8 @@ public class Tetris extends JFrame implements GGActListener {
     private void setDifficultySpeed(String difficulty) {
         if (difficulty.equals("madness")) {
             // No clue how to do this
-            this.slowDown = random.nextInt(SLOW_DOWN_BASE, SLOW_DOWN_BASE + 1);
+            this.slowDown = random.nextInt(0, SLOW_DOWN_BASE + 1);
+
         } else {
             int slowModifier = 0;
             if (difficulty.equals("medium") ) {
