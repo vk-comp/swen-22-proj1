@@ -1,42 +1,31 @@
-// TetrisBlock.java
 package src;
-import ch.aplu.jgamegrid.*;
+
+import ch.aplu.jgamegrid.Actor;
+import ch.aplu.jgamegrid.GameGrid;
+import ch.aplu.jgamegrid.Location;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-class TetrisBlock extends Actor
-{
-    private final int blockId;
-    private final int blockType;
-    private final String blockName;
-    private Location[][] r;
+public class TetrisBlock extends Actor {
 
-    TetrisBlock(Tetris tetris, Location[][] r, int blockId, String blockName, int blockType)
-    {
+    protected int blockId;
+    protected String blockName;
+    protected Location[][] r;
+
+    public TetrisBlock(Tetris tetris){
         super();
-
         this.tetris = tetris;
-        this.blockId = blockId;
-        this.blockType = blockType;
-        this.blockName = blockName;
+    }
+
+    public String toString() { return null;};
 
 
-        for (int i = 0; i < r.length; i++)
-            blocks.add(new TetroBlock(blockType, r[i]));
-    }
-    public int getBlockId() {
-        return blockId;
-    }
-    public String toString() {
-        return "For testing, do not change: Block: " + blockName + ". Location: " + blocks + ". Rotation: " + rotId;
-    }
     protected Tetris tetris;
     private boolean isStarting = true;
-    private int rotId = 0;
+    protected int rotId = 0;
     private int nb;
     protected ArrayList<TetroBlock> blocks = new ArrayList<TetroBlock>();
-    private Actor nextTetrisBlock = null;
+    private TetrisBlock nextTetrisBlock = null;
     private String autoBlockMove = "";
     private int autoBlockIndex = 0;
     public void setAutoBlockMove(String autoBlockMove) {
@@ -97,7 +86,7 @@ class TetrisBlock extends Actor
         autoBlockIndex++;
     }
 
-    // Cechk if the block can be played automatically based on the properties file
+    // Check if the block can be played automatically based on the properties file
     private boolean canAutoPlay() {
         if (autoBlockMove != null && !autoBlockMove.equals("")) {
             if (autoBlockMove.length() > autoBlockIndex) {
