@@ -14,6 +14,8 @@ public class Tetris extends JFrame implements GGActListener {
     private Actor currentBlock = null;  // Currently active block
     private Actor blockPreview = null;   // block in preview window
     private int score = 0;
+
+    private String difficulty = null;
     private int slowDown = 5;
     private Random random = new Random(0);
 
@@ -30,6 +32,8 @@ public class Tetris extends JFrame implements GGActListener {
     // Initialise object
     private void initWithProperties(Properties properties) {
         this.seed = Integer.parseInt(properties.getProperty("seed", "30006"));
+        this.difficulty = properties.getProperty("difficulty");
+        System.out.println(difficulty);
         random = new Random(seed);
         isAuto = Boolean.parseBoolean(properties.getProperty("isAuto"));
         String blockActionProperty = properties.getProperty("autoBlockActions", "");
@@ -75,8 +79,8 @@ public class Tetris extends JFrame implements GGActListener {
         blockActionIndex++;
         Actor t;
         TetrisBlockGenerator generator = new TetrisBlockGenerator();
-        t = generator.generateTetrisBlock(this, "easy");
-        System.out.println(((TetrisBlock) t).getBlockId());
+        t = generator.generateTetrisBlock(this, difficulty);
+        // System.out.println(((TetrisBlock) t).getBlockId());
         if (isAuto) {
             ((TetrisBlock) t).setAutoBlockMove(currentBlockMove);
         }
@@ -183,126 +187,6 @@ public class Tetris extends JFrame implements GGActListener {
                 break;
             default:
                 return;
-        }
-        if (currentBlock instanceof I) {
-            switch (keyEvent) {
-                case KeyEvent.VK_UP:
-                    ((I) currentBlock).rotate();
-                    break;
-                case KeyEvent.VK_LEFT:
-                    ((I) currentBlock).left();
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    ((I) currentBlock).right();
-                    break;
-                case KeyEvent.VK_DOWN:
-                    ((I) currentBlock).drop();
-                    break;
-                default:
-                    return;
-            }
-        } else if (currentBlock instanceof J) {
-            switch (keyEvent) {
-                case KeyEvent.VK_UP:
-                    ((J) currentBlock).rotate();
-                    break;
-                case KeyEvent.VK_LEFT:
-                    ((J) currentBlock).left();
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    ((J) currentBlock).right();
-                    break;
-                case KeyEvent.VK_DOWN:
-                    ((J) currentBlock).drop();
-                    break;
-                default:
-                    return;
-            }
-        } else if (currentBlock instanceof L) {
-            switch (keyEvent) {
-                case KeyEvent.VK_UP:
-                    ((L) currentBlock).rotate();
-                    break;
-                case KeyEvent.VK_LEFT:
-                    ((L) currentBlock).left();
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    ((L) currentBlock).right();
-                    break;
-                case KeyEvent.VK_DOWN:
-                    ((L) currentBlock).drop();
-                    break;
-                default:
-                    return;
-            }
-        } else if (currentBlock instanceof O) {
-            switch (keyEvent) {
-                case KeyEvent.VK_UP:
-                    ((O) currentBlock).rotate();
-                    break;
-                case KeyEvent.VK_LEFT:
-                    ((O) currentBlock).left();
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    ((O) currentBlock).right();
-                    break;
-                case KeyEvent.VK_DOWN:
-                    ((O) currentBlock).drop();
-                    break;
-                default:
-                    return;
-            }
-        } else if (currentBlock instanceof S) {
-            switch (keyEvent) {
-                case KeyEvent.VK_UP:
-                    ((S) currentBlock).rotate();
-                    break;
-                case KeyEvent.VK_LEFT:
-                    ((S) currentBlock).left();
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    ((S) currentBlock).right();
-                    break;
-                case KeyEvent.VK_DOWN:
-                    ((S) currentBlock).drop();
-                    break;
-                default:
-                    return;
-            }
-        } else if (currentBlock instanceof T) {
-            switch (keyEvent) {
-                case KeyEvent.VK_UP:
-                    ((T) currentBlock).rotate();
-                    break;
-                case KeyEvent.VK_LEFT:
-                    ((T) currentBlock).left();
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    ((T) currentBlock).right();
-                    break;
-                case KeyEvent.VK_DOWN:
-                    ((T) currentBlock).drop();
-                    break;
-                default:
-                    return;
-            }
-        } else if (currentBlock instanceof Z) {
-            switch (keyEvent) {
-                case KeyEvent.VK_UP:
-                    ((Z) currentBlock).rotate();
-                    break;
-                case KeyEvent.VK_LEFT:
-                    ((Z) currentBlock).left();
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    ((Z) currentBlock).right();
-                    break;
-                case KeyEvent.VK_DOWN:
-                    ((Z) currentBlock).drop();
-                    break;
-                default:
-                    return;
-            }
         }
     }
     public void act() {
