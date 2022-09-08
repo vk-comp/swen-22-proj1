@@ -1,0 +1,12 @@
+Difficulty: easy
+Average score per round: 2
+------------------------------------------
+Round # 1
+Score: 2
+I: 7
+J: 1
+L: 3
+O: 5
+S: 4
+T: 5
+Z: 2

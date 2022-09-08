@@ -31,6 +31,7 @@ public class Tetris extends JFrame implements GGActListener {
     private String [] blockActions = new String[10];
     private int blockActionIndex = 0;
 
+    private int [] number;
 
     // Initialise object
     private void initWithProperties(Properties properties) {
@@ -48,6 +49,11 @@ public class Tetris extends JFrame implements GGActListener {
         initWithProperties(properties);
         this.gameCallback = gameCallback;
         blockActionIndex = 0;
+        if (difficulty.equals("easy")){
+            number = new int[7];
+        }else{
+            number = new int[10];
+        }
 
         // Set up the UI components. No need to modify the UI Components
         tetrisComponents = new TetrisComponents();
@@ -107,62 +113,22 @@ public class Tetris extends JFrame implements GGActListener {
         }
 
         blockActionIndex++;
-        TetrisBlock t = null;
-        TetrisBlock tb = null;
         int rnd;
         if (difficulty.equals("easy")){
             rnd = random.nextInt(7);
         }else{
             rnd = random.nextInt(10);
         }
-        switch (rnd) {
-            case 0:
-                t = new I(this);
-                tb = new I(this);
-                break;
-            case 1:
-                t = new J(this);
-                tb = new J(this);
-                break;
-            case 2:
-                t = new L(this);
-                tb = new L(this);
-                break;
-            case 3:
-                t = new O(this);
-                tb = new O(this);
-                break;
-            case 4:
-                t = new S(this);
-                tb = new S(this);
-                break;
-            case 5:
-                t = new T(this);
-                tb = new T(this);
-                break;
-            case 6:
-                t = new Z(this);
-                tb = new Z(this);
-                break;
-            case 7:
-                t = new P(this);
-                tb = new P(this);
-                break;
-            case 8:
-                t = new PLUS(this);
-                tb = new PLUS(this);
-                break;
-            case 9:
-                t = new Q(this);
-                tb = new Q(this);
-                break;
-        }
+        number[rnd]++;
+        TetrisBlockGenerator tetrisBlockGenerator = new TetrisBlockGenerator(rnd);
+        TetrisBlock t = tetrisBlockGenerator.generateRandomTetrisBlock(this);
         if (isAuto) {
             t.setAutoBlockMove(currentBlockMove);
         }
         // Show preview tetrisBlock
-        tb.display(gameGrid2, new Location(2, 1));
-        blockPreview = tb;
+        TetrisBlock preview = tetrisBlockGenerator.generateRandomTetrisBlock(this);
+        preview.display(gameGrid2, new Location(2 ,1));
+        blockPreview = preview;
 
         if (difficulty.equals("madness")){
             setDifficultySpeed();
@@ -170,6 +136,7 @@ public class Tetris extends JFrame implements GGActListener {
         t.setSlowDown(slowDown);
         return t;
     }
+
 
     void setCurrentTetrisBlock(TetrisBlock t) {
         gameCallback.changeOfBlock(currentBlock);
@@ -247,6 +214,8 @@ public class Tetris extends JFrame implements GGActListener {
     }
 
     void gameOver() {
+        FileGenerator fileGenerator = new FileGenerator(difficulty,number,score);
+        fileGenerator.writeFile();
         gameGrid1.addActor(new Actor("sprites/gameover.gif"), new Location(5, 5));
         gameGrid1.doPause();
         if (isAuto) {
