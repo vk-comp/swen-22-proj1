@@ -17,6 +17,7 @@ public class Tetris extends JFrame implements GGActListener {
 
     private String difficulty = null;
     private int slowDown;
+    private static final int SLOW_DOWN_BASE = 5;
     private Random random = new Random(0);
 
     private TetrisGameCallback gameCallback;
@@ -43,21 +44,30 @@ public class Tetris extends JFrame implements GGActListener {
 
     // set speed depending on difficulty
     private void setDifficultySpeed(String difficulty) {
-        if (difficulty.equals("medium")  || difficulty.equals("madness")) {
-            this.slowDown = 4;
+        if (difficulty.equals("madness")) {
+            // No clue how to do this
+            this.slowDown = random.nextInt(0, SLOW_DOWN_BASE + 1);
+
         } else {
-            this.slowDown = 5;
+            int slowModifier = 0;
+            if (difficulty.equals("medium") ) {
+                slowModifier = 1;
+                this.slowDown = SLOW_DOWN_BASE - 1;
+            } else {
+                this.slowDown = SLOW_DOWN_BASE;
+            }
+            if (score > 10)
+                this.slowDown = 4 - slowModifier;
+            if (score > 20)
+                this.slowDown = 3 - slowModifier;
+            if (score > 30)
+                this.slowDown = 2 - slowModifier;
+            if (score > 40)
+                this.slowDown = 1 - slowModifier;
+            if (score > 50)
+                slowDown = 0;
         }
-        if (score > 10)
-            this.slowDown--;
-        if (score > 20)
-            this.slowDown = this.slowDown - 2;
-        if (score > 30)
-            this.slowDown = this.slowDown - 3;
-        if (score > 40)
-            this.slowDown = this.slowDown - 4;
-        if (score > 50)
-            slowDown = 0;
+        System.out.println("SlowDOWN : " + this.slowDown);
 
     }
 
@@ -84,7 +94,7 @@ public class Tetris extends JFrame implements GGActListener {
         setTitle("SWEN30006 Tetris Madness");
         score = 0;
         showScore(score);
-        slowDown = 5;
+        setDifficultySpeed(difficulty);
     }
 
     // create a block and assign to a preview mode
