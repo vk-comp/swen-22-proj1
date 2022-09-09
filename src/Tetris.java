@@ -19,6 +19,7 @@ public class Tetris extends JFrame implements GGActListener {
 
     private String difficulty = null;
 
+    private FileGenerator fileGenerator;
     private static final int SLOW_DOWN_BASE = 5;
 
     private TetrisGameCallback gameCallback;
@@ -54,6 +55,8 @@ public class Tetris extends JFrame implements GGActListener {
         }else{
             number = new int[10];
         }
+        fileGenerator = new FileGenerator(difficulty,number,score);
+        fileGenerator.cleanFile();
 
         // Set up the UI components. No need to modify the UI Components
         tetrisComponents = new TetrisComponents();
@@ -214,13 +217,14 @@ public class Tetris extends JFrame implements GGActListener {
     }
 
     void gameOver() {
-        FileGenerator fileGenerator = new FileGenerator(difficulty,number,score);
+        fileGenerator = new FileGenerator(difficulty,number,score);
         fileGenerator.writeFile();
         gameGrid1.addActor(new Actor("sprites/gameover.gif"), new Location(5, 5));
         gameGrid1.doPause();
-        if (isAuto) {
+        if (!isAuto) {
             System.exit(0);
         }
+        Arrays.fill(number, 0);
     }
 
     // Start a new game
