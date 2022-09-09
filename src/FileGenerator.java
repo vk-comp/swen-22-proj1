@@ -1,3 +1,7 @@
+// Workshop 12 Thursday 12:00 Group 10
+// Jinrun Ji: 1394227
+// Alexei Cherstnov: 1080039
+// Vincent Khuat: 1081402
 package src;
 
 import java.io.*;

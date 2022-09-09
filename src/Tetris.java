@@ -1,3 +1,7 @@
+// Workshop 12 Thursday 12:00 Group 10
+// Jinrun Ji: 1394227
+// Alexei Cherstnov: 1080039
+// Vincent Khuat: 1081402
 package src;// Tetris.java
 
 import ch.aplu.jgamegrid.*;
@@ -98,9 +102,10 @@ public class Tetris extends JFrame implements GGActListener {
         if (score > 50)
             this.slowDown = 0;
         if (difficulty.equals("madness")) {
-            this.slowDown = random.nextInt( this.slowDown/2,this.slowDown + 1);
+            int slowDownDouble = (int) (this.slowDown/2);
+            this.slowDown = random.nextInt((this.slowDown + 1) - slowDownDouble) + slowDownDouble;
         }
-        System.out.println("SlowDOWN : " + this.slowDown);
+        // System.out.println("SlowDOWN : " + this.slowDown);
 
     }
 
